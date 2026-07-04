@@ -1,5 +1,3 @@
-
-
 #loader {
   position: fixed;
   inset: 0;
@@ -24,7 +22,7 @@
 .bg-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(rgba(8,18,40,.42), rgba(8,18,40,.52)), radial-gradient(circle at center, rgba(255,255,255,.16), transparent 55%);
+  background: linear-gradient(rgba(8, 18, 40, .42), rgba(8, 18, 40, .52)), radial-gradient(circle at center, rgba(255, 255, 255, .16), transparent 55%);
 }
 
 #flyArea {
@@ -57,8 +55,6 @@
   animation: logoSpin 4.2s linear infinite;
   transform-origin: center;
   will-change: transform;
-  border-radius: 50%;
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.3);
 }
 
 .ring-img {
@@ -94,25 +90,26 @@
   object-fit: contain;
   object-position: center;
   display: block;
-  filter: drop-shadow(0 14px 18px rgba(0,0,0,.26));
+  filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .26));
 }
 
 .brandText {
   position: relative;
-  margin-top: -2px;
+  margin-top: 24px;
+  text-align: center;
   font-size: 28px;
   line-height: 1;
   font-weight: 900;
   letter-spacing: 1px;
   white-space: nowrap;
-  background: linear-gradient(90deg, #ffdd55, #ff5e00, #ff0055, #ffdd55);
+  background: linear-gradient(90deg, #fff9c4, #ffe0b2, #ffccbc, #fff9c4);
   background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(255,255,255,.35);
-  text-shadow: 0 2px 4px rgba(0,0,0,.65), 0 0 18px rgba(239,29,34,.55), 0 0 28px rgba(255,138,29,.38);
-  filter: drop-shadow(0 12px 22px rgba(0,0,0,.42));
+  -webkit-text-stroke: 0.6px rgba(255, 255, 255, .28);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .45), 0 0 10px rgba(255, 255, 255, .55);
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, .28));
   animation: gradientText 3s linear infinite, textGlow 1.8s ease-in-out infinite alternate;
 }
 
@@ -138,7 +135,7 @@
   border-radius: 30px;
   padding: 2px;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.6);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
 #bar {
@@ -174,27 +171,23 @@
   top: 0;
   padding: 10px 16px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.45);
+  border: 1px solid rgba(255, 255, 255, .45);
   color: #fff;
   font-size: 12px;
   font-weight: 900;
-  box-shadow: 0 14px 35px rgba(0,0,0,.26), 0 0 22px rgba(255,255,255,.18);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, .26), 0 0 22px rgba(255, 255, 255, .18);
   white-space: nowrap;
   letter-spacing: .2px;
-  animation: flyToCore 1.35s cubic-bezier(.45,.02,.18,1) forwards;
+  animation: flyToCore 1.35s cubic-bezier(.45, .02, .18, 1) forwards;
 }
 
 .ready-badge {
   position: relative;
   width: 140px;
   height: 140px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1e293b, #0f172a);
-  border: 2px solid rgba(34,197,94,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 16px 35px rgba(34,197,94,.3), 0 0 50px rgba(34,197,94,.2), inset 0 0 15px rgba(34,197,94,.2);
   animation: readyPop .45s ease;
 }
 
@@ -205,7 +198,84 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 4px 10px rgba(34,197,94,0.6));
+  filter: drop-shadow(0 4px 10px rgba(34, 197, 94, 0.6));
+}
+
+/* Success / OK badge */
+.success-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: #12d78a; /* bright green */
+  box-shadow: 0 18px 40px rgba(18, 215, 138, 0.18), 0 6px 18px rgba(0,0,0,0.35), 0 0 40px rgba(18, 215, 138, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(.85);
+  animation: successPop .6s cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+.success-check {
+  width: 76px;
+  height: 76px;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.35));
+}
+
+/* stroke-draw for SVG check path */
+.success-path {
+  stroke: #fff;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: drawCheck 0.6s cubic-bezier(.2,.9,.2,1) .12s forwards;
+}
+
+/* subtle pulse after draw */
+.success-circle.pulse {
+  animation: successPop .6s cubic-bezier(.2,.9,.2,1) forwards, successPulse 1.2s ease 0.7s 2 both;
+}
+
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes successPulse {
+  0% { transform: scale(1); box-shadow: 0 18px 40px rgba(18, 215, 138, 0.18); }
+  50% { transform: scale(1.06); box-shadow: 0 24px 60px rgba(18,215,138,0.24); }
+  100% { transform: scale(1); box-shadow: 0 18px 40px rgba(18, 215, 138, 0.18); }
+}
+
+@keyframes successPop {
+  0% { transform: scale(.6); opacity: 0; }
+  60% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* fade loader out */
+#loader.hide {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .45s ease .12s;
+}
+
+/* show website after loader hides */
+#website.show {
+  display: block;
+  animation: siteFade .6s ease .12s both;
+}
+
+@keyframes siteFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes flyToCore {
@@ -213,8 +283,15 @@
     transform: translate(var(--x), var(--y)) scale(1) rotate(var(--r));
     opacity: 0;
   }
-  12% { opacity: 1; }
-  78% { opacity: 1; }
+
+  12% {
+    opacity: 1;
+  }
+
+  78% {
+    opacity: 1;
+  }
+
   100% {
     transform: translate(calc(50vw - 38px), calc(50vh - 18px)) scale(.10) rotate(20deg);
     opacity: 0;
@@ -222,33 +299,65 @@
 }
 
 @keyframes rotateRing {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes logoSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes gradientText {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 300% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 300% 50%;
+  }
 }
 
 @keyframes textGlow {
-  from { text-shadow: 0 2px 4px rgba(0,0,0,.70), 0 0 14px rgba(239,29,34,.55), 0 0 24px rgba(255,138,29,.36); }
-  to { text-shadow: 0 2px 5px rgba(0,0,0,.78), 0 0 24px rgba(255,255,255,.78), 0 0 36px rgba(255,59,63,.70), 0 0 46px rgba(255,138,29,.55); }
+  from {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, .70), 0 0 14px rgba(239, 29, 34, .55), 0 0 24px rgba(255, 138, 29, .36);
+  }
+
+  to {
+    text-shadow: 0 2px 5px rgba(0, 0, 0, .78), 0 0 24px rgba(255, 255, 255, .78), 0 0 36px rgba(255, 59, 63, .70), 0 0 46px rgba(255, 138, 29, .55);
+  }
 }
 
 @keyframes readyPop {
-  0% { transform: scale(.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(.8);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes gradientMove {
-  0% { background-position: 100% 0; }
-  100% { background-position: 0 0; }
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
 }
 
 @media (max-width:520px) {
@@ -256,16 +365,22 @@
     width: min(92vw, 330px) !important;
     height: 300px !important;
   }
+
   .logoBadge {
     width: min(72vw, 220px) !important;
     height: min(72vw, 220px) !important;
   }
+
   .logoOuter,
-  .logoCenter { inset: -1px !important; }
-  .logoCenter > div {
+  .logoCenter {
+    inset: -1px !important;
+  }
+
+  .logoCenter>div {
     width: 100% !important;
     height: 100% !important;
   }
+
   .brandText {
     max-width: 92vw;
     font-size: clamp(19px, 5.5vw, 23px) !important;
@@ -274,22 +389,42 @@
     text-align: center;
     line-height: 1.16 !important;
   }
+
   .progressWrap {
     width: min(88vw, 380px) !important;
     margin-top: 30px !important;
   }
-  .progressWrap span { font-size: 12px; }
+
+  .progressWrap span {
+    font-size: 12px;
+  }
 }
 
 @media (max-height:620px) {
-  #mainCore { height: 240px !important; }
-  .logoBadge { width: 170px !important; height: 170px !important; }
+  #mainCore {
+    height: 240px !important;
+  }
+
+  .logoBadge {
+    width: 170px !important;
+    height: 170px !important;
+  }
+
   .logoOuter,
-  .logoCenter { inset: -1px !important; }
-  .logoCenter > div {
+  .logoCenter {
+    inset: -1px !important;
+  }
+
+  .logoCenter>div {
     width: 100% !important;
     height: 100% !important;
   }
-  .brandText { font-size: 19px !important; }
-  .progressWrap { margin-top: 24px !important; }
+
+  .brandText {
+    font-size: 19px !important;
+  }
+
+  .progressWrap {
+    margin-top: 24px !important;
+  }
 }

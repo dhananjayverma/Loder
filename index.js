@@ -28,10 +28,7 @@ function createFlyingItem() {
   item.innerText = items[Math.floor(Math.random() * items.length)];
   item.className = "flying-item";
   
-  // Set random background dynamically
-  item.style.background = gradients[Math.floor(Math.random() * gradients.length)];
-
-  // Set CSS variables for animation dynamically
+  item.style.background = gradients[Math.floor(Math.random() * gradients.length)];  // Set CSS variables for animation dynamically
   const spreadX = Math.min(620, window.innerWidth - 72);
   const startX = window.innerWidth / 2 - spreadX / 2 + Math.random() * spreadX;
   const startY = Math.max(28, window.innerHeight / 2 - 330 + Math.random() * 145);
@@ -59,25 +56,40 @@ const progressTimer = setInterval(() => {
     clearInterval(flyTimer);
     clearInterval(progressTimer);
 
-    statusText.innerText = "CUIMS Ready";
-    mainCore.textContent = "";
+    const brandText = document.querySelector(".brandText");
+    if (brandText) brandText.style.display = "none";
+    
+    const progressWrap = document.querySelector(".progressWrap");
+    if (progressWrap) progressWrap.style.display = "none";
 
-    const readyBadge = document.createElement("div");
-    readyBadge.className = "ready-badge";
-    readyBadge.innerHTML = "<span class='check-icon'>&#10004;</span>";
+    const logoBadge = document.querySelector(".logoBadge");
+    if (logoBadge) {
+      logoBadge.style.display = "flex";
+      logoBadge.style.alignItems = "center";
+      logoBadge.style.justifyContent = "center";
+      logoBadge.innerHTML = "";
+      
+      const readyBadge = document.createElement("div");
+      readyBadge.className = "ready-badge";
+      readyBadge.innerHTML = `
+        <div class="success-badge">
+          <div class="success-circle" aria-hidden="true">
+            <svg class="success-check" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true">
+              <path class="success-path" d="M4.7 12.7 L9.3 17.3 L19.3 7.3" />
+            </svg>
+          </div>
+        </div>
+      `;
 
-    mainCore.appendChild(readyBadge);
+      logoBadge.appendChild(readyBadge);
 
-    setTimeout(() => {
-      loader.style.transition = "opacity .75s ease";
-      loader.style.opacity = "0";
-    }, 1100);
-
-    setTimeout(() => {
-      loader.style.display = "none";
-      website.style.display = "block";
-      document.body.style.overflow = "auto";
-    }, 1900);
+      // After the path draw completes, add a subtle pulse class to the circle
+      setTimeout(() => {
+        const circle = logoBadge.querySelector('.success-circle');
+        if (circle) circle.classList.add('pulse');
+        // STOP: Do not hide the loader or reveal the website — remain on OK state
+      }, 800);
+    }
   }
 
   bar.style.width = progress + "%";
