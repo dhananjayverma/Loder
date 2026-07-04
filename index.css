@@ -102,14 +102,14 @@
   font-weight: 900;
   letter-spacing: 1px;
   white-space: nowrap;
-  background: linear-gradient(90deg, #fff9c4, #ffe0b2, #ffccbc, #fff9c4);
+  background: linear-gradient(90deg, #ffffff, #fff6c8, #d8fff4, #cdefff, #ffffff);
   background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  -webkit-text-stroke: 0.6px rgba(255, 255, 255, .28);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, .45), 0 0 10px rgba(255, 255, 255, .55);
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, .28));
+  -webkit-text-stroke: 0.45px rgba(255, 255, 255, .42);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .42), 0 0 12px rgba(255, 255, 255, .58);
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, .24));
   animation: gradientText 3s linear infinite, textGlow 1.8s ease-in-out infinite alternate;
 }
 
@@ -122,31 +122,70 @@
 
 .progress-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  color: white;
+  gap: 14px;
   font-size: 13px;
+  line-height: 1;
   font-weight: 800;
   margin-bottom: 10px;
+  padding: 0 2px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, .58), 0 0 14px rgba(255, 255, 255, .24);
+}
+
+#status {
+  flex: 1 1 auto;
+  text-align: left;
+  background: linear-gradient(90deg, #ffffff 0%, #fff3c4 36%, #bff7ea 72%, #ffffff 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: progressTextGradient 3.2s linear infinite;
+}
+
+#percent {
+  flex: 0 0 42px;
+  text-align: right;
+  background: linear-gradient(90deg, #ffffff 0%, #fff0b8 45%, #b7f5ff 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: progressTextGradient 3.2s linear infinite;
 }
 
 .progress-track {
+  position: relative;
+  overflow: hidden;
   height: 14px;
-  background: rgba(0, 0, 0, 0.4);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .03)), linear-gradient(90deg, rgba(15, 15, 18, .82), rgba(26, 17, 23, .92));
   border-radius: 30px;
   padding: 2px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, .18);
+  box-shadow: inset 0 2px 7px rgba(0, 0, 0, .68), 0 0 18px rgba(255, 100, 35, .10);
 }
 
 #bar {
+  position: relative;
+  overflow: hidden;
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #ff8a1d, #ef1d22, #ff3b3f, #ff8a1d);
-  background-size: 300% 100%;
+  background: linear-gradient(90deg, #ff8a1d 0%, #ff4d1f 32%, #f1143a 68%, #ff6a00 100%);
+  background-size: 220% 100%;
   animation: gradientMove 2.5s linear infinite;
   border-radius: 30px;
   transition: width .35s ease;
-  box-shadow: 0 0 15px rgba(239, 29, 34, 0.7), inset 0 2px 3px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 16px rgba(255, 65, 31, .78), 0 0 30px rgba(239, 20, 58, .34), inset 0 2px 3px rgba(255, 255, 255, .48), inset 0 -2px 4px rgba(120, 0, 18, .24);
+}
+
+#bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, .36) 45%, transparent 78%);
+  transform: translateX(-100%);
+  animation: progressShine 1.8s ease-in-out infinite;
 }
 
 #website {
@@ -330,11 +369,11 @@
 
 @keyframes textGlow {
   from {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, .70), 0 0 14px rgba(239, 29, 34, .55), 0 0 24px rgba(255, 138, 29, .36);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, .62), 0 0 14px rgba(255, 255, 255, .45), 0 0 24px rgba(216, 255, 244, .28);
   }
 
   to {
-    text-shadow: 0 2px 5px rgba(0, 0, 0, .78), 0 0 24px rgba(255, 255, 255, .78), 0 0 36px rgba(255, 59, 63, .70), 0 0 46px rgba(255, 138, 29, .55);
+    text-shadow: 0 2px 5px rgba(0, 0, 0, .70), 0 0 24px rgba(255, 255, 255, .74), 0 0 36px rgba(205, 239, 255, .46), 0 0 46px rgba(255, 246, 200, .38);
   }
 }
 
@@ -357,6 +396,32 @@
 
   100% {
     background-position: 0 0;
+  }
+}
+
+@keyframes progressShine {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+}
+
+@keyframes progressTextGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 220% 50%;
   }
 }
 
